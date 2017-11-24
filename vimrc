@@ -14,7 +14,7 @@ syntax on
 "--------
 " color scheme
 set background=dark
-color solarized
+"color solarized
 
 " highlight current line
 au WinLeave * set nocursorline nocursorcolumn
@@ -34,7 +34,8 @@ set nofoldenable                                                  " disable fold
 set confirm                                                       " prompt when existing from an unsaved file
 set backspace=indent,eol,start                                    " More powerful backspacing
 set t_Co=256                                                      " Explicitly tell vim that the terminal has 256 colors "
-set mouse=a                                                       " use mouse in all modes
+"set mouse=a                                                       " use mouse in all modes
+set mouse=c                                                       " use mouse in all modes
 set report=0                                                      " always report number of lines changed                "
 set nowrap                                                        " dont wrap lines
 set scrolloff=5                                                   " 5 lines above/below cursor when scrolling
@@ -61,7 +62,7 @@ autocmd FileType php setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
 autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120
 autocmd FileType coffee,javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 list listchars=tab:>- 
 autocmd FileType html,htmldjango,xhtml,haml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=0
 autocmd FileType sass,scss,css setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
 
@@ -175,6 +176,9 @@ smap <C-k> <Plug>(neocomplcache_snippets_force_expand)
 imap <C-l> <Plug>(neocomplcache_snippets_force_jump)
 smap <C-l> <Plug>(neocomplcache_snippets_force_jump)
 
+" jedi-vim config
+
+
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -196,7 +200,7 @@ set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_S
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 
 " Keybindings for plugin toggle
-nnoremap <F2> :set invpaste paste?<CR>
+" nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 nmap <F5> :TagbarToggle<cr>
 nmap <F6> :NERDTreeToggle<cr>
@@ -266,3 +270,18 @@ if has("gui_running")
     map <D-9> 9gt
     map <D-0> :tablast<CR>
 endif
+
+
+" User Setup
+" set pastetoggle=<F6>
+
+:function ToggleWrap()
+: if (&wrap == 1)
+:   set nowrap
+: else
+:   set wrap
+: endif
+:endfunction
+map <F9> :call ToggleWrap()<CR>
+map! <F9> :call ToggleWrap()<CR>
+
